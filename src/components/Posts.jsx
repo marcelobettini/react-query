@@ -3,26 +3,21 @@ import { getPosts } from "../api/posts";
 import { Spinner, Table } from "react-bootstrap"
 
 export default function Posts({ setPostId }) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [posts, setPosts] = useState(null);
+    const [state, setState] = useState("isLoading");
+
     const fetchData = async () => {
-        setIsLoading(true);
         try {
             const data = await getPosts();
-            setPosts(data);
-            setError(null);
+            setState(data);
         } catch (error) {
-            setError(error);
-            setPosts(null);
+            setState("error");
         }
-        setIsLoading(false);
     };
     useEffect(() => {
         fetchData();
     }, []);
 
-    if (isLoading) {
+    if (state === "isLoading") {
         return (
             <div className="d-flex">
                 Loading <Spinner animation="grow" variant="success" /> Posts...
@@ -30,7 +25,7 @@ export default function Posts({ setPostId }) {
         );
     }
 
-    if (error) {
+    if (state === "error") {
         return (
             <section className="alert alert-danger">
                 Error fetching posts: {error.message}
@@ -49,7 +44,7 @@ export default function Posts({ setPostId }) {
                 </thead>
                 <tbody>
 
-                    {posts.map((post) => (
+                    {state.map((post) => (
                         <tr key={post.id} onClick={() => setPostId(post.id)} >
 
                             <td >{post.title}
