@@ -4,19 +4,16 @@ import { Spinner } from "react-bootstrap"
 
 export default function Post({ postId }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const [post, setPost] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true);
             try {
                 const data = await getPostById(postId);
                 setPost(data);
-                setError(null);
             } catch (error) {
-                setError(error);
-                setPost(null);
+                setError(true);
             }
             setIsLoading(false);
         };

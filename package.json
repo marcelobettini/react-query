@@ -3,10 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "db": "json-server --watch db.json --delay 1500 --port 3001",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "db": "json-server --watch db.json --delay 1500 --port 3001"
+    "preview": "vite preview"
+    
   },
   "dependencies": {
     "axios": "^0.27.2",

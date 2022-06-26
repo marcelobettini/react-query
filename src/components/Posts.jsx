@@ -4,17 +4,14 @@ import { Spinner, Table } from "react-bootstrap"
 
 export default function Posts({ setPostId }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const [posts, setPosts] = useState(null);
     const fetchData = async () => {
-        setIsLoading(true);
         try {
             const data = await getPosts();
             setPosts(data);
-            setError(null);
         } catch (error) {
-            setError(error);
-            setPosts(null);
+            setError(true);
         }
         setIsLoading(false);
     };
@@ -25,7 +22,7 @@ export default function Posts({ setPostId }) {
     if (isLoading) {
         return (
             <div className="d-flex">
-                Loading <Spinner animation="grow" variant="success" /> Posts...
+                Loading <Spinner animation="border" variant="success" role="status" /> Posts...
             </div>
         );
     }
@@ -47,12 +44,11 @@ export default function Posts({ setPostId }) {
                         <th>Title</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ display: "block", maxHeight: '70vh', overflow: "auto" }}>
 
                     {posts.map((post) => (
                         <tr key={post.id} onClick={() => setPostId(post.id)} >
-
-                            <td >{post.title}
+                            <td >{post.title.toUpperCase()}
                             </td>
                         </tr>
                     ))}

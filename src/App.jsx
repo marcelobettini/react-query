@@ -4,19 +4,19 @@ import Post from "./components/Post";
 import Posts from "./components/Posts";
 
 export default function App() {
-  const [postId, setPostId] = useState(-1);
+  const [postId, setPostId] = useState(null);
 
   return (
     <main className="container">
       <h1 className="mb-4">React-Query Demo</h1>
-      {postId > -1 && (
+      {postId && (
         <div>
-          <a onClick={() => setPostId(-1)} href="#">
+          <a onClick={() => setPostId(null)} href="#">
             Back
           </a>
         </div>
       )}
-      {postId > -1 ? (
+      {postId ? (
         <Post postId={postId} setPostId={setPostId} />
       ) : (
         <div className="row gap-4">

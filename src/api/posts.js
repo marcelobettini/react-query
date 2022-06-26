@@ -1,12 +1,12 @@
 import { API } from "./API";
 
-export const getPostById = async (postId) => {
-    const { data } = await API.get(`/posts/${postId}`);
+export const getPosts = async () => {
+    const { data } = await API.get(`/posts`);
     return data;
 };
 
-export const getPosts = async () => {
-    const { data } = await API.get(`/posts`);
+export const getPostById = async (postId) => {
+    const { data } = await API.get(`/posts/${postId}`);
     return data;
 };
 

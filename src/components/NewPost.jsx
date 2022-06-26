@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { createNewPost } from "../api/posts";
 
 function NewPost() {
@@ -7,21 +7,18 @@ function NewPost() {
     const [body, setBody] = useState("");
 
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setIsLoading(true);
         try {
             await createNewPost({ title, body });
-
             setTitle("");
             setBody("");
         } catch (error) {
-            setError(error);
+            setError(true);
         }
-
         setIsLoading(false);
     };
 
@@ -53,7 +50,7 @@ function NewPost() {
                     ></Form.Control>
                 </div>
 
-                <button disabled={isLoading || !title} className="btn btn-success mb-2">
+                <button disabled={isLoading || !title || !body} className="btn btn-success mb-2">
                     {isLoading ? (
                         <>
                             Submitting...<span className="spinner-border spinner-border-sm"></span>
@@ -64,9 +61,7 @@ function NewPost() {
                     )}
                 </button>
                 {error && (
-                    <p className="alert alert-danger">
-                        Error creating the post: {error.message}
-                    </p>
+                    <p className="alert alert-danger">Error creating the post</p>
                 )}
 
             </Form>
