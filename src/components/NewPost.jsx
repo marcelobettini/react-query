@@ -15,7 +15,6 @@ function NewPost() {
         setIsLoading(true);
         try {
             await createNewPost({ title, body });
-
             setTitle("");
             setBody("");
         } catch (error) {
@@ -44,7 +43,7 @@ function NewPost() {
                     <Form.Label htmlFor="content">
                         <b>Content:</b>
                     </Form.Label>
-                    <Form.Control as={'textarea'}
+                    <Form.Control as='textarea'
                         value={body}
                         onChange={(e) => setBody(e.target.value)}
                         style={{ resize: "vertical" }}
