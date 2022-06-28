@@ -49,7 +49,7 @@ export default function Posts({ setPostId }) {
                         <th>Title {isFetching && <span className="text-50">Re-Fetching...</span>}</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ display: "block", maxHeight: '70vh', overflow: "auto" }}>
 
                     {data.map((post) => (
                         <tr key={post.id} onClick={() => setPostId(post.id)} >
